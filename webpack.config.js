@@ -1,49 +1,37 @@
-var webpack = require("webpack");
-
 module.exports = {
     entry: {
-        app: './resources/assets',
-        vendor: './resources/assets/bootstrap.js'
+        app: './resources/assets/js/main.js',
     },
     output: {
-        path: './public',
-        filename: 'app.bundle.js'
+        filename: '[name].bundle.js',
+        sourceMapFilename: '[name].bundle.map'
     },
-    plugins: [
-        new webpack.optimize.CommonsChunkPlugin("bootstrap", "vendor.bundle.js")
-    ],
-    resolve: {
-        extensions: ['', '.js', '.vue']
+    babel: {
+        presets: ['es2015'],
+        plugins: ['transform-runtime', 'transform-vue-jsx']
     },
     module: {
-        preLoaders: [{
-            test: /\.(js|vue)$/,
-            loader: "eslint-loader",
-            include: __dirname + '/resources/assets'
-        }],
-        loaders: [{
-            test: /\.js/,
-            loader: 'babel-loader',
-            include: __dirname + '/resources/assets',
-            query: {
-                presets: ['es2015']
-            }
-        }, {
-            test: /\.vue/,
-            loader: 'vue-loader',
-            include: __dirname + '/resources/assets'
-        }, {
-            test: /\.html/,
-            loader: 'raw-loader',
-            include: __dirname + '/resources/assets'
-        }]
+        loaders: [
+            {
+                test: /\.vue$/,
+                loader: 'vue'
+            },
+            {
+                test: /\.css$/,
+                loader: "style-loader!css-loader"
+            },
+            {
+                test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
+                loader: 'url-loader',
+            },
+        ]
     },
-    devServer: {
-        contentBase: "./public",
-        proxy: {
-            '/api/*': {
-                target: 'http://127.0.0.1:9000'
-            }
+    resolve: {
+        alias: {vue: 'vue/dist/vue.js'}
+    },
+    vue: {
+        loaders: {
+            scss: 'style!css!sass'
         }
     }
 };

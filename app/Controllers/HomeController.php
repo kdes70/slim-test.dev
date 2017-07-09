@@ -14,43 +14,11 @@ class HomeController extends Controller
     {
         $cards = Car::query()->orderBy('id', 'asc')->get();
 
-        return $response->withJson($cards);
+        $this->view->render($response, 'index.html', [ 'cards' => $cards]);
 
     }
 
 
-    public function create()
-    {
 
-    }
-
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-
-    public function show($id)
-    {
-
-    }
-
-
-    public function edit($id)
-    {
-        //
-    }
-
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
-    }
 
 }

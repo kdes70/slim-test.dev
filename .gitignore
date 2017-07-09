@@ -6,4 +6,5 @@
 .DS_STORE
 composer.lock
 node_modules
-/.idea/*
+/.idea
+/npm-debug.log
