@@ -8,3 +8,4 @@ composer.lock
 node_modules
 /.idea
 /npm-debug.log
+/public/assets/js/app.bundle.js
