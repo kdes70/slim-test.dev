@@ -26,12 +26,13 @@ class Car extends Model
     }
 
     /**
-     * Получаем сгрупированый список марок авто
+     * Получаем список марок авто
      */
-    public static function findCarsMake(): Car
+    public static function findCarsMake()
     {
         return self::select('make')
-            ->groupBy('make')
+            ->distinct()
+            ->orderBy('make')
             ->get();
     }
 
@@ -40,9 +41,27 @@ class Car extends Model
      */
     public static function getModelCar(string $model)
     {
-        return self::select(['model'])
+        return self::select('model')
             ->where(['make' => $model])
             ->groupBy('model')
             ->get();
+    }
+
+    public static function getMakeModelList(string $make, string $model)
+    {
+        return self::query()
+            ->where(['make' => $make])
+            ->where(['model' => $model])
+            ->get();
+    }
+
+    public static function storeCar(array $data)
+    {
+         self::insert([
+            'make'  => $data['make'],
+            'model' => $data['model'],
+            'year'  => (int)$data['year'],
+            'price' => $data['price'],
+        ]);
     }
 }

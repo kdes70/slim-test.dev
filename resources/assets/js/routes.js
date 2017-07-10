@@ -3,13 +3,24 @@ import VueRouter from 'vue-router';
 let routes = [
     {
         path: '/',
-        component: require('./components/Cars.vue'),
+        name: 'home',
+        component: require('./components/Car/List.vue'),
     },
     {
-        path: '/car/:model',
-        name: 'model',
-        component: require('./components/Car.vue')
+        path: '/car/:make',
+        name: 'make',
+        component: require('./components/Car/Make.vue')
     },
+    {
+        path: '/car/:make/:model',
+        name: 'model',
+        component: require('./components/Car/Model.vue')
+    },
+    {
+        path: '/add',
+        name: 'add',
+        component: require('./components/Car/Form.vue')
+    }
 
 ];
 

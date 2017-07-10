@@ -13,5 +13,7 @@ $app->add(function ($req, $res, $next) {
 
 $app->get('/', 'HomeController:index');
 $app->get('/api/cars', 'CarController:index');
-$app->get('/api/car/{model}', 'CarController:show');
+$app->get('/api/car/{make}', 'CarController:showMake');
+$app->get('/api/car/{make}/{model}', 'CarController:showModel');
+$app->post('/api/car/add', 'CarController:store');
 
